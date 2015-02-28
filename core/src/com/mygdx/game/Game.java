@@ -19,7 +19,7 @@ public class Game extends ApplicationAdapter {
     public OrthographicCamera camera;
     public ResourceManager resourceManager;
     
-    public boolean debug = true;
+    public boolean debug = false;
     
     ArrayList<BaseObject> objects = new ArrayList<BaseObject>();
     ArrayList<BaseObject> drawableObjects = new ArrayList<BaseObject>();
@@ -71,8 +71,8 @@ public class Game extends ApplicationAdapter {
         if (debug) {
             System.out.println(collidableObjects.size());
         }
-        for (int i = 0; i < collidableObjects.size(); i++) {            
-            collidableObjects.get(i).collisionGrouping(this);
+        while (collidableObjects.size() > 0) {            
+            collidableObjects.get(0).collisionGrouping(this);
         }
         shape.end();
         
@@ -81,18 +81,19 @@ public class Game extends ApplicationAdapter {
         }
         
         camera.update();
-        /*
-        render.setProjectionMatrix(camera.combined);
-        render.begin();
+        if (!debug) {
+            render.setProjectionMatrix(camera.combined);
+            render.begin();
 
-        Collections.sort(drawableObjects);
-        for (BaseObject object : drawableObjects) {
-            Drawable o = (Drawable) object;
-            o.render(this);
+            Collections.sort(drawableObjects);
+            for (BaseObject object : drawableObjects) {
+                Drawable o = (Drawable) object;
+                o.render(this);
+            }
+
+            render.end();
         }
-
-        render.end();
-        */
+        
         
         for (int i = 0; i < toBeDestroyed.size(); i++) {
             removeObject(toBeDestroyed.get(i));

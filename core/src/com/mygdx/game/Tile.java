@@ -68,6 +68,13 @@ public class Tile extends BaseObject implements Drawable, Collidable {
             game.shape.setColor(Color.RED);
             game.shape.rect(getHitBox().x, getHitBox().y, getHitBox().width, getHitBox().height);
         }
+        
+        TileEntityCode(game);
+        
+        game.collidableObjects.remove(this);    
+    }
+    
+    private void TileEntityCode (Game game) {
         for (int i = 0; i < game.collidableObjects.size(); i++) {
             if (game.collidableObjects.get(i) != this) {
                 
@@ -84,10 +91,6 @@ public class Tile extends BaseObject implements Drawable, Collidable {
                     }
                 }
             }
-            
-            //if (!game.debug) {
-            game.collidableObjects.remove(this);
-            //}
         }
     }
 }
