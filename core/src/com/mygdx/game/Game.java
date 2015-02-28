@@ -46,7 +46,7 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(0.8f, 1, 0.8f, 1);
+        Gdx.gl.glClearColor(0.8f, 0.8f, 1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         toBeDestroyed.clear();
