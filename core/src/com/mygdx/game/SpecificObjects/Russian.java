@@ -16,10 +16,14 @@ public class Russian extends Entity{
     boolean grounded = true;
     boolean willDie = false;
     Timer hugTimer;
+    Rifle rifle;
     
     public Russian(Game game, float x, float y) {
         super(game, x - game.resourceManager.getTexture("Rus.png").getWidth()/2, y, 2);
         changeImage(game.resourceManager.getTexture("Rus.png"));
+        
+        rifle = new Rifle(game, this);
+        game.addObject(rifle);
     }
 
     @Override
@@ -41,15 +45,17 @@ public class Russian extends Entity{
         if (hugTimer != null && willDie) {
             if (hugTimer.triggered) {
                 changeImage(game.resourceManager.getTexture("RusDed.png"));
-                dx = (float) (-45 + (Math.random() * 90));
+                dx = (float) (-90 + (Math.random() *180));
                 dy = (float) ((Math.random() * 40));
+                
+                rifle.held = false;
+                dx = (float) (-90 + (Math.random() * 180));
+                dy = (float) ((Math.random() * 40));
+                
                 
                 willDie = false;
             }
         }
-        
-        y += dy;
-        x += dx;
     }
     
     public void getAttacked (Timer timer) {

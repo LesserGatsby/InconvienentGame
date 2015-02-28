@@ -101,19 +101,33 @@ public class Player extends Entity{
             dx = (dx / Math.abs(dx)) * cappedSpeed;
         }
         
-        y += dy;
-        x += dx;
         game.camera.position.set(x + displayImage.getTexture().getWidth()/2, y + displayImage.getTexture().getHeight()/2, 0);
     }
 
     @Override
+    public void preCollision(Game game) {
+        super.preCollision(game);
+        
+        game.camera.position.set(x + displayImage.getTexture().getWidth()/2, y + displayImage.getTexture().getHeight()/2, 0);
+    }
+    
+    @Override
     public void onCollision(Game game, Collidable object) {
         super.onCollision(game, object);
         if (object instanceof GroundTile) {
-            grounded = true;
+            
+            Tile tile = (Tile) object;
+            
+            float augX = x - (tile.x - tile.displayImage.getWidth() / 2);
+            float augY = y - (tile.y - tile.displayImage.getHeight() / 2);
+            
+            float nx = 0;
+            float ny = 0;
+            
+            if (augY > tile.displayImage.getHeight()/2) {
+                grounded = true;
+            }
         }
-        
-        game.camera.position.set(x + displayImage.getTexture().getWidth()/2, y + displayImage.getTexture().getHeight()/2, 0);
     }
 
     @Override

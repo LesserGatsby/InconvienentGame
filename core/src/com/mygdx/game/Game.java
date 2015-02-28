@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game extends ApplicationAdapter {
-
+    
+    public float gravity = 5;
+    
     public SpriteBatch render;
     ShapeRenderer shape;
     public OrthographicCamera camera;
@@ -42,6 +44,14 @@ public class Game extends ApplicationAdapter {
                 addObject(new Russian(this, resourceManager.getTexture("BaseTile.png").getWidth() * i, 47));
             }
         }
+        
+        for (int i = 1; i < 5; i++) {
+            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getHeight()*-3, resourceManager.getTexture("BaseTile.png").getHeight()* i, 0));
+        }
+        
+        for (int i = 1; i < 5; i++) {
+            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, resourceManager.getTexture("BaseTile.png").getHeight()* 5, 0));
+        }
     }
 
     @Override
@@ -60,7 +70,7 @@ public class Game extends ApplicationAdapter {
             }
             if (objects.get(i) instanceof Collidable) {
                 Collidable col = (Collidable) objects.get(i);
-                col.preCollision();
+                col.preCollision(this);
                 collidableObjects.add(col);
             }
         }
@@ -71,6 +81,11 @@ public class Game extends ApplicationAdapter {
         if (debug) {
             System.out.println(collidableObjects.size());
         }
+        
+        for (Collidable col : collidableObjects) {
+            col.prePreCollision(this);
+        }
+        
         while (collidableObjects.size() > 0) {            
             collidableObjects.get(0).collisionGrouping(this);
         }

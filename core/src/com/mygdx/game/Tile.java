@@ -45,7 +45,12 @@ public class Tile extends BaseObject implements Drawable, Collidable {
     }
 
     @Override
-    public void preCollision() {
+    public void prePreCollision(Game game) {
+        preCollision(game);
+    }
+    
+    @Override
+    public void preCollision(Game game) {
         hitBox = new Rectangle(x - displayImage.getWidth() / 2, y - displayImage.getHeight() / 2, displayImage.getWidth(), displayImage.getHeight());
     }
 
@@ -69,22 +74,13 @@ public class Tile extends BaseObject implements Drawable, Collidable {
             game.shape.rect(getHitBox().x, getHitBox().y, getHitBox().width, getHitBox().height);
         }
         
-        TileEntityCode(game);
-        
-        game.collidableObjects.remove(this);    
-    }
-    
-    private void TileEntityCode (Game game) {
         for (int i = 0; i < game.collidableObjects.size(); i++) {
             if (game.collidableObjects.get(i) != this) {
-                
-                preCollision();
-                game.collidableObjects.get(i).preCollision();
                 
                 if (getHitBox().overlaps(game.collidableObjects.get(i).getHitBox())) {
                     game.collidableObjects.get(i).onCollision(game, this);
                     onCollision(game, game.collidableObjects.get(i));
-                    
+
                     if (game.debug) {
                         game.shape.setColor(Color.BLUE);
                         game.shape.line(getHitBox().x + getHitBox().width/2, getHitBox().y + getHitBox().height/2, game.collidableObjects.get(i).getHitBox().x + game.collidableObjects.get(i).getHitBox().width/2, game.collidableObjects.get(i).getHitBox().y + game.collidableObjects.get(i).getHitBox().height/2);
@@ -92,5 +88,7 @@ public class Tile extends BaseObject implements Drawable, Collidable {
                 }
             }
         }
+        
+        game.collidableObjects.remove(this);    
     }
 }

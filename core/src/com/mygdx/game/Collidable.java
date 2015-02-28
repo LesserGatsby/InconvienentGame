@@ -9,7 +9,9 @@ public interface Collidable {
     public float x = 0;
     public float y = 0;
     
-    public void preCollision ();
+    public void prePreCollision(Game game);
+    
+    public void preCollision (Game game);
     
     public Rectangle getHitBox();
     

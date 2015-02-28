@@ -38,8 +38,8 @@ public class HugBox extends Entity{
     }
 
     @Override
-    public void preCollision() {
-        super.preCollision(); //To change body of generated methods, choose Tools | Templates.
+    public void preCollision(Game game) {
+        super.preCollision(game); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
