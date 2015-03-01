@@ -13,13 +13,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Game extends ApplicationAdapter {
-
+    
+    public float gravity = 1;
+    
     public SpriteBatch render;
     ShapeRenderer shape;
     public OrthographicCamera camera;
     public ResourceManager resourceManager;
     
     public boolean debug = false;
+    public Player player;
     
     ArrayList<BaseObject> objects = new ArrayList<BaseObject>();
     ArrayList<BaseObject> drawableObjects = new ArrayList<BaseObject>();
@@ -33,14 +36,23 @@ public class Game extends ApplicationAdapter {
         camera = new OrthographicCamera(100, 100);
         resourceManager = new ResourceManager();
         
-        addObject(new Player(this, 0, 47));
+        player = new Player(this, 0, 47);
+        addObject(player);
         
         for (int i = -60; i < 60; i++) {
             addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, 0, 0));
             
-            if (i % 5 == 0) {
+            if (i % 10 == 0 && i != 0) {
                 addObject(new Russian(this, resourceManager.getTexture("BaseTile.png").getWidth() * i, 47));
             }
+        }
+        
+        for (int i = 1; i < 5; i++) {
+            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getHeight()*-3, resourceManager.getTexture("BaseTile.png").getHeight()* i, 0));
+        }
+        
+        for (int i = 1; i < 5; i++) {
+            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, resourceManager.getTexture("BaseTile.png").getHeight()* 5, 0));
         }
     }
 
@@ -60,7 +72,7 @@ public class Game extends ApplicationAdapter {
             }
             if (objects.get(i) instanceof Collidable) {
                 Collidable col = (Collidable) objects.get(i);
-                col.preCollision();
+                col.preCollision(this);
                 collidableObjects.add(col);
             }
         }
@@ -71,6 +83,11 @@ public class Game extends ApplicationAdapter {
         if (debug) {
             System.out.println(collidableObjects.size());
         }
+        
+        for (Collidable col : collidableObjects) {
+            col.prePreCollision(this);
+        }
+        
         while (collidableObjects.size() > 0) {            
             collidableObjects.get(0).collisionGrouping(this);
         }
