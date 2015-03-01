@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
@@ -71,6 +72,8 @@ public class Entity extends Tile{
     }
 }
 =======
+=======
+>>>>>>> Main
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
@@ -174,4 +177,7 @@ public class Entity extends Tile {
         }
     }
 }
+<<<<<<< HEAD
 >>>>>>> origin/Main
+=======
+>>>>>>> Main

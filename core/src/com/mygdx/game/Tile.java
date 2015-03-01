@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
@@ -96,6 +97,8 @@ public class Tile extends BaseObject implements Drawable, Collidable {
     }
 }
 =======
+=======
+>>>>>>> Main
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
@@ -190,4 +193,7 @@ public class Tile extends BaseObject implements Drawable, Collidable {
         game.collidableObjects.remove(this);    
     }
 }
+<<<<<<< HEAD
 >>>>>>> origin/Main
+=======
+>>>>>>> Main

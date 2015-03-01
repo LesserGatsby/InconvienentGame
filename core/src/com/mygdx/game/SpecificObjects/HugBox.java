@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package com.mygdx.game.SpecificObjects;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -58,6 +59,8 @@ public class HugBox extends Entity{
     }
 }
 =======
+=======
+>>>>>>> Main
 package com.mygdx.game.SpecificObjects;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -116,4 +119,7 @@ public class HugBox extends Entity{
         }
     }
 }
+<<<<<<< HEAD
 >>>>>>> origin/Main
+=======
+>>>>>>> Main

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -20,6 +21,8 @@ public interface Collidable {
     
 }
 =======
+=======
+>>>>>>> Main
 package com.mygdx.game;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -42,4 +45,7 @@ public interface Collidable {
     public void collisionGrouping (Game game);
     
 }
+<<<<<<< HEAD
 >>>>>>> origin/Main
+=======
+>>>>>>> Main
