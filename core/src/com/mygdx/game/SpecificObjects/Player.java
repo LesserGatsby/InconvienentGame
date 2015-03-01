@@ -51,12 +51,8 @@ public class Player extends Entity{
         
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             if (allowJump) {
-                dy += 30;
-                if (Math.abs(dx) < 2) {
-                    dy *= 1.9;
-                } else {
-                    dx *= 2;
-                }
+                dy += 20;
+                               
                 allowJump = false;
                 grounded = false;
             }
@@ -66,16 +62,7 @@ public class Player extends Entity{
             dx = 0;
             
             if (!hugging) {
-                if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                    displayImage.setScale(-1, 1);
-                    dx = -speed;
-                }
-
-                if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                    displayImage.setScale(1, 1);
-                    dx = speed;
-                }
-
+                
                 if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
                     displayImage.setTexture(game.resourceManager.getTexture("SGTPrehug.png"));
                     readyToHug = true;
@@ -94,6 +81,18 @@ public class Player extends Entity{
                         hugTimer.resetTimer();
                     }
                 }
+            }
+        }
+        
+        if (!hugging) {
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                displayImage.setScale(-1, 1);
+                dx = -speed;
+            }
+
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                displayImage.setScale(1, 1);
+                dx = speed;
             }
         }
         

@@ -17,6 +17,6 @@ public class BaseObject implements Comparable<BaseObject>{
     }
     
     public void destroy(Game game) {
-        
+        toBeDestroyed = true;
     }
 }

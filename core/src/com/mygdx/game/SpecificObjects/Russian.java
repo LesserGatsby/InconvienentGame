@@ -15,8 +15,13 @@ public class Russian extends Entity{
     boolean allowJump = true;
     boolean grounded = true;
     boolean willDie = false;
+    boolean alive = true;
     Timer hugTimer;
     Rifle rifle;
+    
+    Timer fireTimer;
+    
+    int direction = 1;
     
     public Russian(Game game, float x, float y) {
         super(game, x - game.resourceManager.getTexture("Rus.png").getWidth()/2, y, 2);
@@ -24,6 +29,9 @@ public class Russian extends Entity{
         
         rifle = new Rifle(game, this);
         game.addObject(rifle);
+        
+        fireTimer = new Timer(game, 120, true, true);
+        game.addObject(fireTimer);
     }
 
     @Override
@@ -42,8 +50,22 @@ public class Russian extends Entity{
             dx *= .5f;
         }
         
+        if (alive) {
+            if (game.player.x < x) {
+                direction = -1;
+            }
+            else {
+                direction = 1;
+            }
+            
+            if (fireTimer.triggered) {
+                game.addObject(new Bullet(game, x + displayImage.getWidth()/2, y + displayImage.getHeight()/2, direction * 16));
+            }
+        }
+        
         if (hugTimer != null && willDie) {
             if (hugTimer.triggered) {
+                alive = false;
                 changeImage(game.resourceManager.getTexture("RusDed.png"));
                 dx = (float) (-90 + (Math.random() *180));
                 dy = (float) ((Math.random() * 40));
@@ -65,6 +87,16 @@ public class Russian extends Entity{
     @Override
     public void onCollision(Game game, Collidable object) {
         super.onCollision(game, object);
+        
+        displayImage.setScale(direction, 1);
+        rifle.displayImage.setScale(direction, 1);
+        
+        if (rifle.held) {
+            if (direction == -1) {
+                rifle.x += 30;
+            }
+        }
+        
         if (object instanceof HugBox) {
             willDie = true;
         }

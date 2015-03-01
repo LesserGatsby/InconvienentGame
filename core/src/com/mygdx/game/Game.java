@@ -14,7 +14,7 @@ import java.util.Collections;
 
 public class Game extends ApplicationAdapter {
     
-    public float gravity = 5;
+    public float gravity = 1;
     
     public SpriteBatch render;
     ShapeRenderer shape;
@@ -22,6 +22,7 @@ public class Game extends ApplicationAdapter {
     public ResourceManager resourceManager;
     
     public boolean debug = false;
+    public Player player;
     
     ArrayList<BaseObject> objects = new ArrayList<BaseObject>();
     ArrayList<BaseObject> drawableObjects = new ArrayList<BaseObject>();
@@ -35,12 +36,13 @@ public class Game extends ApplicationAdapter {
         camera = new OrthographicCamera(100, 100);
         resourceManager = new ResourceManager();
         
-        addObject(new Player(this, 0, 47));
+        player = new Player(this, 0, 47);
+        addObject(player);
         
         for (int i = -60; i < 60; i++) {
             addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, 0, 0));
             
-            if (i % 5 == 0) {
+            if (i % 10 == 0) {
                 addObject(new Russian(this, resourceManager.getTexture("BaseTile.png").getWidth() * i, 47));
             }
         }

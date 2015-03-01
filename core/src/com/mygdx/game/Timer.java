@@ -35,7 +35,7 @@ public class Timer extends BaseObject{
             triggered = false;
         }
         
-        if (repeat) {
+        if (repeat && triggered) {
             resetTimer();
         }
     }
