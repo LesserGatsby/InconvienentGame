@@ -15,30 +15,24 @@ public class Russian extends Entity{
     boolean allowJump = true;
     boolean grounded = true;
     boolean willDie = false;
-<<<<<<< HEAD
+
     Timer hugTimer;
-=======
     boolean alive = true;
-    Timer hugTimer;
     Rifle rifle;
     
     Timer fireTimer;
     
     int direction = 1;
->>>>>>> origin/Main
     
     public Russian(Game game, float x, float y) {
         super(game, x - game.resourceManager.getTexture("Rus.png").getWidth()/2, y, 2);
         changeImage(game.resourceManager.getTexture("Rus.png"));
-<<<<<<< HEAD
-=======
-        
+
         rifle = new Rifle(game, this);
         game.addObject(rifle);
         
         fireTimer = new Timer(game, 120, true, true);
         game.addObject(fireTimer);
->>>>>>> origin/Main
     }
 
     @Override
@@ -57,20 +51,6 @@ public class Russian extends Entity{
             dx *= .5f;
         }
         
-<<<<<<< HEAD
-        if (hugTimer != null && willDie) {
-            if (hugTimer.triggered) {
-                changeImage(game.resourceManager.getTexture("RusDed.png"));
-                dx = (float) (-45 + (Math.random() * 90));
-                dy = (float) ((Math.random() * 40));
-                
-                willDie = false;
-            }
-        }
-        
-        y += dy;
-        x += dx;
-=======
         if (alive) {
             if (game.player.x < x) {
                 direction = -1;
@@ -99,7 +79,6 @@ public class Russian extends Entity{
                 willDie = false;
             }
         }
->>>>>>> origin/Main
     }
     
     public void getAttacked (Timer timer) {
@@ -109,8 +88,6 @@ public class Russian extends Entity{
     @Override
     public void onCollision(Game game, Collidable object) {
         super.onCollision(game, object);
-<<<<<<< HEAD
-=======
         
         displayImage.setScale(direction, 1);
         rifle.displayImage.setScale(direction, 1);
@@ -121,7 +98,6 @@ public class Russian extends Entity{
             }
         }
         
->>>>>>> origin/Main
         if (object instanceof HugBox) {
             willDie = true;
         }

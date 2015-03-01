@@ -51,17 +51,8 @@ public class Player extends Entity{
         
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             if (allowJump) {
-<<<<<<< HEAD
-                dy += 30;
-                if (Math.abs(dx) < 2) {
-                    dy *= 1.9;
-                } else {
-                    dx *= 2;
-                }
-=======
                 dy += 20;
-                               
->>>>>>> origin/Main
+
                 allowJump = false;
                 grounded = false;
             }
@@ -71,21 +62,7 @@ public class Player extends Entity{
             dx = 0;
             
             if (!hugging) {
-<<<<<<< HEAD
-                if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                    displayImage.setScale(-1, 1);
-                    dx = -speed;
-                }
-
-                if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                    displayImage.setScale(1, 1);
-                    dx = speed;
-                }
-
-=======
-                
->>>>>>> origin/Main
-                if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+              if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
                     displayImage.setTexture(game.resourceManager.getTexture("SGTPrehug.png"));
                     readyToHug = true;
                 }
@@ -106,8 +83,6 @@ public class Player extends Entity{
             }
         }
         
-<<<<<<< HEAD
-=======
         if (!hugging) {
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
                 displayImage.setScale(-1, 1);
@@ -119,30 +94,9 @@ public class Player extends Entity{
                 dx = speed;
             }
         }
-        
->>>>>>> origin/Main
-        if (Math.abs(dx) > cappedSpeed) {
-            dx = (dx / Math.abs(dx)) * cappedSpeed;
-        }
-        
-<<<<<<< HEAD
-        y += dy;
-        x += dx;
-=======
->>>>>>> origin/Main
-        game.camera.position.set(x + displayImage.getTexture().getWidth()/2, y + displayImage.getTexture().getHeight()/2, 0);
     }
 
     @Override
-<<<<<<< HEAD
-    public void onCollision(Game game, Collidable object) {
-        super.onCollision(game, object);
-        if (object instanceof GroundTile) {
-            grounded = true;
-        }
-        
-        game.camera.position.set(x + displayImage.getTexture().getWidth()/2, y + displayImage.getTexture().getHeight()/2, 0);
-=======
     public void preCollision(Game game) {
         super.preCollision(game);
         
@@ -166,7 +120,6 @@ public class Player extends Entity{
                 grounded = true;
             }
         }
->>>>>>> origin/Main
     }
 
     @Override
