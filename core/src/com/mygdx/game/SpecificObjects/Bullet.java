@@ -7,6 +7,7 @@ import com.mygdx.game.Game;
 public class Bullet extends Entity{
 
     float deathTimer = 40;
+    float waitForCollide = 3;
     
     public Bullet(Game game, float x, float y, float speed) {
         super(game, x, y, 4);
@@ -20,6 +21,7 @@ public class Bullet extends Entity{
         
         dy = 0;
         deathTimer -= 1;
+        waitForCollide -= 1;
         
         if (deathTimer < 1) {
             toBeDestroyed = true;
@@ -29,13 +31,15 @@ public class Bullet extends Entity{
     @Override
     public void onCollision(Game game, Collidable object) {
         
-        if (object instanceof GroundTile) {
-            destroy(game);
-        }
-        
-        if (object instanceof Player) {
-            Player p = (Player) object;
-            p.destroy(game);
+        if (waitForCollide < 0) {
+            if (object instanceof GroundTile) {
+                destroy(game);
+            }
+
+            if (object instanceof Player) {
+                Player p = (Player) object;
+                p.destroy(game);
+            }
         }
     }
 }

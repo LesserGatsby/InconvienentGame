@@ -42,7 +42,7 @@ public class Game extends ApplicationAdapter {
         for (int i = -60; i < 60; i++) {
             addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, 0, 0));
             
-            if (i % 10 == 0) {
+            if (i % 10 == 0 && i != 0) {
                 addObject(new Russian(this, resourceManager.getTexture("BaseTile.png").getWidth() * i, 47));
             }
         }
