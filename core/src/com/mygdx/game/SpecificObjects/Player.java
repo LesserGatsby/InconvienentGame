@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.Collidable;
 import com.mygdx.game.Entity;
 import com.mygdx.game.Game;
@@ -12,7 +13,7 @@ import com.mygdx.game.Timer;
 
 public class Player extends Entity{
 
-    public float speed = 5;
+    public float speed = 10;
     public float cappedSpeed = 30;
     boolean allowJump = true;
     boolean grounded = true;
@@ -95,11 +96,13 @@ public class Player extends Entity{
             }
         }
     }
-
+    
+    
     @Override
     public void preCollision(Game game) {
         super.preCollision(game);
         
+        hitBox = new Rectangle(x + 20, y, displayImage.getWidth() - 40, displayImage.getHeight());
         game.camera.position.set(x + displayImage.getTexture().getWidth()/2, y + displayImage.getTexture().getHeight()/2, 0);
     }
     

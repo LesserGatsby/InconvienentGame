@@ -2,13 +2,15 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.SpecificObjects.Player;
 import com.mygdx.game.SpecificObjects.GroundTile;
+import com.mygdx.game.SpecificObjects.Player;
 import com.mygdx.game.SpecificObjects.Russian;
+import com.mygdx.game.SpecificObjects.TestStage;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -23,6 +25,9 @@ public class Game extends ApplicationAdapter {
     
     public boolean debug = false;
     public Player player;
+    public Stage stage;
+    
+    private boolean restartProtect = true;
     
     ArrayList<BaseObject> objects = new ArrayList<BaseObject>();
     ArrayList<BaseObject> drawableObjects = new ArrayList<BaseObject>();
@@ -36,28 +41,28 @@ public class Game extends ApplicationAdapter {
         camera = new OrthographicCamera(100, 100);
         resourceManager = new ResourceManager();
         
-        player = new Player(this, 0, 47);
-        addObject(player);
-        
-        for (int i = -60; i < 60; i++) {
-            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, 0, 0));
-            
-            if (i % 10 == 0 && i != 0) {
-                addObject(new Russian(this, resourceManager.getTexture("BaseTile.png").getWidth() * i, 47));
-            }
-        }
-        
-        for (int i = 1; i < 5; i++) {
-            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getHeight()*-3, resourceManager.getTexture("BaseTile.png").getHeight()* i, 0));
-        }
-        
-        for (int i = 1; i < 5; i++) {
-            addObject(new GroundTile(this, "BaseTile.png", resourceManager.getTexture("BaseTile.png").getWidth() * i, resourceManager.getTexture("BaseTile.png").getHeight()* 5, 0));
-        }
+        stage = new TestStage(this);
+        stage.begin(this);
     }
 
     @Override
     public void render() {
+        
+        if (Gdx.input.isKeyPressed(Input.Keys.R)) {
+            if (restartProtect) {
+                stage.restart(this);
+                restartProtect = false;
+            }
+        } else {
+            restartProtect = true;
+        }
+        
+        if (Gdx.input.isButtonPressed(Input.Keys.R)) {
+            debug = true;
+        }        else {
+            debug = false;
+        }
+        
         Gdx.gl.glClearColor(0.8f, 0.8f, 1f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

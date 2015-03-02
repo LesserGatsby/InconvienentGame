@@ -55,7 +55,7 @@ public class Entity extends Tile {
     @Override
     public void preCollision(Game game) {
         displayImage.setPosition(x, y);
-        super.hitBox = displayImage.getBoundingRectangle();
+        hitBox = displayImage.getBoundingRectangle();
     }
 
     @Override
