@@ -31,7 +31,11 @@ public class HugBox extends Entity{
     @Override
     public void update(Game game) {
         if (hugTimer.triggered && !waitOneFrame) {
-            toBeDestroyed = true;
+            destroy(game);
+        }
+        
+        if (game.player == null) {
+            destroy(game);
         }
         
         waitOneFrame = !waitOneFrame;

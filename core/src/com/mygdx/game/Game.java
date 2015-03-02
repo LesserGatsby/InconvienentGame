@@ -63,7 +63,7 @@ public class Game extends ApplicationAdapter {
             debug = false;
         }
         
-        Gdx.gl.glClearColor(0.8f, 0.8f, 1f, 1);
+        Gdx.gl.glClearColor(0.3f, 0.0f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         toBeDestroyed.clear();

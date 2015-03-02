@@ -26,7 +26,7 @@ public class Player extends Entity{
         super(game, x - game.resourceManager.getTexture("SGT.png").getWidth()/2, y, 1);
         changeImage(game.resourceManager.getTexture("SGT.png"));
         
-        hugTimer = new Timer(game, 5, false, false);
+        hugTimer = new Timer(game, 20, false, false);
         game.addObject(hugTimer);
     }
 
